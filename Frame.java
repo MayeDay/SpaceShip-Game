@@ -6,6 +6,7 @@ public class Frame extends JFrame{
 	private String title;
 	private int width, height;
 	private Game game;
+	private StartMenu startmenu;
 
 	public Frame(int width, int height, String title, Game game){
 
@@ -31,8 +32,11 @@ public class Frame extends JFrame{
 		setVisible(true);
 		game.start();
 
+	}
 
-
+	public Game getGame(){
+		System.out.println("Frame getting game");
+		return this.game;
 	}
 
 

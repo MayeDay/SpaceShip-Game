@@ -20,7 +20,7 @@ public class StartMenu{
 
 	private int xxx = 1, yyy = 1, zzz = 1;
 
-	public StartMenu(MouseInput mouseInput,Frame frame, Game game){
+	public StartMenu(MouseInput mouseInput, Frame frame, Game game){
 
 		this.game = game;
 		this.mouseInput = mouseInput;
@@ -30,7 +30,6 @@ public class StartMenu{
 	}
 
 	private void init(){
-
 		startButton = new Button(Game._WIDTH/2 - 100, Game._HEIGHT/2 - 200, 200, 100);
 		exitButton = new Button(Game._WIDTH/2 - 100, Game._HEIGHT/2 - 50 , 200, 100);
 		highScoresButton = new Button(Game._WIDTH/2 - 100, Game._HEIGHT/2  + 100, 200, 75);
@@ -40,10 +39,13 @@ public class StartMenu{
 
 	public void render(Graphics g){
 
+
+		//Title 
 		Graphics2D g2d = (Graphics2D)g;
+
 		g.setColor(Color.GREEN);
 		g.setFont(new Font("Arial", Font.ITALIC, 45));
-		g.drawString("World Wreckers", Game._WIDTH/2 - 165, Game._HEIGHT/2 - 300);
+		g.drawString("Space Blasters", Game._WIDTH/2 - 165, Game._HEIGHT/2 - 300);
 
 		//Buttons
 		g2d.fill(startButton.getButtonBounds());

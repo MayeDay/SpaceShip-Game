@@ -5,8 +5,8 @@ public class KeyInput extends KeyAdapter{
 
 	private Handler handler;
 	private GameObject player;
-	private SoundLoader soundLoader = new SoundLoader();
-	private String soundPath =  "./Music-SoundEffects/hover.wav";
+	//private SoundLoader soundLoader = new SoundLoader();
+	//private String soundPath =  "./Music-SoundEffects/hover.wav";
 
 	public KeyInput(Handler handler){
 

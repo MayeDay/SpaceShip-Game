@@ -13,15 +13,14 @@ public class MouseInput extends MouseAdapter{
 
 
 	public MouseInput(Handler handler){
-
-
-
+		this.handler = handler;
 	}
 
-	public void mouseClicked(MouseEvent e){
+	public void mousePressed(MouseEvent e){
 
 		click = e.getButton();
 		isClicked = true;
+
 	}
 
 	public void mouseEntered(MouseEvent e){
@@ -37,12 +36,9 @@ public class MouseInput extends MouseAdapter{
 
 		x = e.getX();
 		y = e.getY();
-		System.out.println(x+ " " + y);
-
 	}
 
 	public void mouseReleased(MouseEvent e){
-
 		isClicked = false;
 
 	}

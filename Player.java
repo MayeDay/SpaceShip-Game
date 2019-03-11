@@ -81,7 +81,6 @@ public class Player extends GameObject{
 
 	private void deathCheck(){
 		if(health <= 0){
-			isDead = true;
 		}
 	}
 
@@ -94,7 +93,7 @@ public class Player extends GameObject{
 
 		Graphics2D g2d = (Graphics2D)g;
 
-		if(!isDead){
+		if(health > 0){
 			//Main Body
 			g.setColor(new Color(1, 1, 255));
 			g.fillRect(getX(), getY(), getWidth(), getHeight());
@@ -132,9 +131,13 @@ public class Player extends GameObject{
 				g.setColor(Color.RED);
 				g.setFont(new Font("Arial", Font.ITALIC, 20));
 				g.drawString("YOU HAVE DIED ", getX() - 25, getY());
-		}else{
-			loop++;
-		}
+				loop++;
+
+			}else if(loop == 1800){
+				handler.remove(this);
+				isDead = true;
+
+			}
 
 		}
 	}

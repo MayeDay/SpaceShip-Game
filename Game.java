@@ -64,7 +64,6 @@ public class Game extends Canvas implements Runnable{
 		handler = new Handler();
 		imageLoader = new ImageLoader();
 		background = new Background();
-
 		backgroundImage = background.getBackground();
 		soundLoader = new SoundLoader();
 		
@@ -77,16 +76,18 @@ public class Game extends Canvas implements Runnable{
 		mouseInput = new MouseInput(handler);
 		addMouseListener(mouseInput);
 		addMouseMotionListener(mouseInput);
-
+		
 		//Add Player
-		player = new Player(4500, 9500, 20, 40, ObjectId.Player, handler);
-		handler.add(player);
-
 		cam = new Camera(0, 0);
 
+		
 		//Add Start Menu Buttons
 		menu = new StartMenu(mouseInput, frame, this);
-		
+
+	}
+
+	public void loadMenu(){
+
 	}
 
 
@@ -161,7 +162,6 @@ public class Game extends Canvas implements Runnable{
 		if(pressedStart == true){
 		//////////////////////////////
 			
-
 			g.translate(cam.getX(), cam.getY());
 
 			for(int xx = 0; xx < backgroundImage.getWidth()*200; xx+=backgroundImage.getWidth()){
@@ -188,9 +188,26 @@ public class Game extends Canvas implements Runnable{
 	private void tick(){
 
 		//Updates all positions and timing
+
+		//Check if start has been pressed
 		if(pressedStart == true){
+			if(player == null){
+				player = new Player(4500, 9500, 20, 40, ObjectId.Player, handler);
+				handler.add(player);
+			}
+
+			//Ticks all existing game Objects
 			handler.tick();
 
+			//Checks if player has died
+			if(player.isDead == true){
+				player = null;
+				handler.objectList.clear();
+				pressedStart = false;
+
+			}
+
+			//Ticks Camera on Player
 			for(int i = 0; i <handler.objectList.size(); i++){
 				if(handler.objectList.get(i).getId() == ObjectId.Player){
 					cam.tick(handler.objectList.get(i));
