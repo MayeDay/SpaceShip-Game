@@ -26,8 +26,8 @@ public class Test extends GameObject {
 		this.handler = handler;
 		points = 10;
 
-		setVelY(4);
-		setVelX(4);
+		setVelY(8);
+		setVelX(8);
 
 		size = rand.nextInt(2);
 
@@ -65,20 +65,20 @@ public class Test extends GameObject {
 
 			//Moving Shape
 			if(getX() > tempObject.getX()){
-				setVelX(4);
+				setVelX(8);
 				set = -set;
 
 			}else if(getX() < tempObject.getX()){
-				setVelX(-4);
+				setVelX(-8);
 				set = -set;
 			}
 
 			if(getY() > tempObject.getY()){
-				setVelY(4);
+				setVelY(8);
 				set = -set;
 
 			}else if(getY() < tempObject.getY()){
-				setVelY(-4);
+				setVelY(-8);
 				set = -set;
 			}
 			

@@ -22,7 +22,7 @@ public class Bullet extends GameObject{
 		this.handler = handler;
 
 		soundPath = "./Music-SoundEffects/blaster.wav";
-		playSound(soundPath);
+		playSound(soundPath, 5.0f);
 		setVelY(10);
 
 		xxx = 255;
@@ -50,10 +50,13 @@ public class Bullet extends GameObject{
 
 			if(tempObject.getId() == ObjectId.Test){
 				if(tempObject.recBounds().intersects(recBounds()) || tempObject.getBounds().intersects(getX(), getY(), getWidth(), getHeight())){
-					soundPath = "./Music-SoundEffects/explode.wav";
-					playSound(soundPath);
+					soundPath = "./Music-SoundEffects/bang.wav";
+
+					playSound(soundPath, -8.0f);
+
 					handler.remove(tempObject);
 					handler.remove(this);
+
 					addPoints();
 					
 				}

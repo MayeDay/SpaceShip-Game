@@ -26,10 +26,13 @@ public class Player extends GameObject{
 		super(x, y, width, height, id);
 		this.handler = handler;
 
+		//flying sound
 		soundPath = "./Music-SoundEffects/flying.wav";
-		playSound(soundPath);
+		playSound(soundPath, 5.0f);
 		clip.loop(Clip.LOOP_CONTINUOUSLY);
 
+		//collision sound
+		soundEffect = "./Music-SoundEffects/shoot.wav";
 
 
 		xxx = 1;
@@ -46,12 +49,13 @@ public class Player extends GameObject{
 		y+= getVelY();
 		this.points = getPoints();
 
-		if (xxx <= 0){
+		if (xxx <= 150){
 			xxx = 255;
 		}
-		if(yyy <= 0){
+		if(yyy <= 150){
 			yyy = 255;
 		}
+		//Move To Game Class
 		for(int i = 0; i < 200; i++){
 			int spawn = rand.nextInt(20000);
 			int spawn1 = rand.nextInt(20000);
@@ -70,10 +74,12 @@ public class Player extends GameObject{
 
 		for(int i = 0; i < handler.objectList.size(); i++){
 			GameObject tempObject = handler.objectList.get(i);
-			if(tempObject != this && tempObject.getId() != ObjectId.Bullet){
+			if(tempObject.getId() == ObjectId.Test){
 				if(recBounds().intersects(tempObject.recBounds()) || recBounds().intersects(tempObject.getX(), tempObject.getY(), tempObject.getWidth(), tempObject.getHeight())){
 					handler.remove(tempObject);
+					playSound(soundEffect, 6.0f);
 					health -=50;
+
 				}
 			}
 		}
@@ -95,7 +101,7 @@ public class Player extends GameObject{
 
 		if(health > 0){
 			//Main Body
-			g.setColor(new Color(1, 1, 255));
+			g.setColor(new Color(xxx, yyy, zzz));
 			g.fillRect(getX(), getY(), getWidth(), getHeight());
 			g.fillOval(getX()-2, getY() - 10, getWidth() + 4, getHeight());
 
@@ -134,7 +140,6 @@ public class Player extends GameObject{
 				loop++;
 
 			}else if(loop == 1800){
-				handler.remove(this);
 				isDead = true;
 
 			}

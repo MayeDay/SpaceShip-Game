@@ -42,6 +42,7 @@ public abstract class GameObject implements States{
 
 	//Object Sound Effects
 	protected String soundPath;
+	protected String soundEffect;
 	protected AudioInputStream stream;
 	protected Clip clip;
 	protected FloatControl soundVolume;
@@ -79,7 +80,7 @@ public abstract class GameObject implements States{
 
 	}
 
-	public void playSound(String path){
+	public void playSound(String path, float volume){
 
 		try{
 
@@ -89,12 +90,17 @@ public abstract class GameObject implements States{
 
 			clip.open(stream);
 			soundVolume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-			soundVolume.setValue(6.02f);
+			soundVolume.setValue(volume);
 			clip.start();
 			
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+	}
+
+	public void setVolume(float volume){
+
+
 	}
 
 	//Setters and Getters for position

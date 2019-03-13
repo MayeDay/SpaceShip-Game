@@ -41,6 +41,10 @@ public class KeyInput extends KeyAdapter{
 			player.setVelY(5);
 			player.isDown = true;
 
+		}else if(code == KeyEvent.VK_Z){
+			
+			
+
 		}else if(code == KeyEvent.VK_SPACE && !player.isShooting && !player.isDead){
 			player.isShooting = true;
 			player.shoot();

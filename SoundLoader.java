@@ -47,6 +47,12 @@ public class SoundLoader{
 		}
 	}
 
+	public void adjustVolume(float volume){
+
+		controlVolume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+		controlVolume.setValue(volume);
+	}
+
 	public void playSoundEffect(){
 
 		try{
