@@ -3,12 +3,15 @@ import java.awt.Graphics2D;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 
 public class StartMenu{
 
 	private Game game;
 	private MouseInput mouseInput;
 	private Frame frame;
+	private ImageLoader imageLoader;
+	private BufferedImage image;
 
 	private String start = "Start";
 	private String exit = "Exit";
@@ -26,6 +29,9 @@ public class StartMenu{
 		this.mouseInput = mouseInput;
 		this.frame = frame;
 
+		imageLoader = new ImageLoader();
+		image = imageLoader.loadImage("./res-background/title.JPEG");
+
 		init();
 	}
 
@@ -37,17 +43,26 @@ public class StartMenu{
 
 	}
 
+	public void tick(){
+
+
+		
+	}
+
 	public void render(Graphics g){
 
 
 		//Title 
 		Graphics2D g2d = (Graphics2D)g;
 
-		g.setColor(Color.GREEN);
+		g.drawImage(image, 0, 0 ,1000, 800, null);
+
+		g.setColor(new Color(2, 27, 149));
 		g.setFont(new Font("Arial", Font.ITALIC, 45));
 		g.drawString("Space Blasters", Game._WIDTH/2 - 165, Game._HEIGHT/2 - 300);
 
 		//Buttons
+		g.setColor(new Color(75, 0, 115));
 		g2d.fill(startButton.getButtonBounds());
 		g2d.fill(exitButton.getButtonBounds());
 		g2d.fill(highScoresButton.getButtonBounds());
@@ -60,9 +75,9 @@ public class StartMenu{
 
 		if(startButton.getButtonBounds().contains(mouseInput.getX(), mouseInput.getY())){
 
-			g.setColor(Color.RED);
+			g.setColor(new Color(137, 0, 208));
 			g2d.fill(startButton.getButtonBounds());
-			g.setColor(Color.BLUE);
+			g.setColor(new Color(195, 0, 255));
 			g.drawString(start, startButton.getX() + 45, startButton.getY() + 50);
 
 			if(mouseInput.isClicked == true){
@@ -73,9 +88,9 @@ public class StartMenu{
 
 		if(exitButton.getButtonBounds().contains(mouseInput.getX(), mouseInput.getY())){
 			
-			g.setColor(Color.RED);
+			g.setColor(new Color(137, 0, 208));
 			g2d.fill(exitButton.getButtonBounds());
-			g.setColor(Color.BLUE);
+			g.setColor(new Color(195, 0, 255));
 			g.drawString(exit, exitButton.getX() + 45, exitButton.getY() + 50);
 			
 			if(mouseInput.isClicked == true){
@@ -85,9 +100,9 @@ public class StartMenu{
 
 		if(highScoresButton.getButtonBounds().contains(mouseInput.getX(), mouseInput.getY())){
 			
-			g.setColor(Color.RED);
+			g.setColor(new Color(137, 0, 208));
 			g2d.fill(highScoresButton.getButtonBounds());
-			g.setColor(Color.BLUE);
+			g.setColor(new Color(195, 0, 255));
 			g.drawString(score, highScoresButton.getX() + 25, highScoresButton.getY() + 50);
 		}
 	}

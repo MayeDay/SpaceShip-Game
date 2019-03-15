@@ -2,7 +2,7 @@ import java.awt.image.BufferedImage;
 
 public class Background{
 	
-	private String backgroundPath = "/res-background/SpaceBackground.png"; 
+	private String backgroundPath = "/res-background/SpaceBackgroundEdit.png"; 
 	private ImageLoader imageLoader = Game.getImageLoader();
 	private BufferedImage image;
 	private int width, height;

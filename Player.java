@@ -15,7 +15,6 @@ public class Player extends GameObject{
 	private Handler handler;
 	private Random rand = new Random();
 
-	protected int health = 300;
 	protected int xxx, yyy, zzz;
 	protected int points = 0;
 	protected boolean isDead = false;
@@ -26,6 +25,7 @@ public class Player extends GameObject{
 		super(x, y, width, height, id);
 		this.handler = handler;
 
+		health = 300;
 		//flying sound
 		soundPath = "./Music-SoundEffects/flying.wav";
 		playSound(soundPath, 5.0f);
@@ -56,15 +56,7 @@ public class Player extends GameObject{
 			yyy = 255;
 		}
 		//Move To Game Class
-		for(int i = 0; i < 200; i++){
-			int spawn = rand.nextInt(20000);
-			int spawn1 = rand.nextInt(20000);
-			if(spawn > getX() + 1000 && spawn < getX() + 1500 && spawn1 > getY() + 1000 && spawn1 < getY()+1500){
-				handler.add(new Test(rand.nextInt(spawn), rand.nextInt(spawn1), 25, 25, ObjectId.Test, handler));
-				System.out.println("x: " + spawn + " y: " + spawn1);
-				break;
-			}
-		}
+		
 
 		collision();
 		deathCheck();

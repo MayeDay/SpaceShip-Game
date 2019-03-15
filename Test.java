@@ -43,6 +43,7 @@ public class Test extends GameObject {
 			loop = 0;	
 			y-=getVelY();
 			x-=getVelX();
+		
 		}else{
 				loop++;
 			}
@@ -60,6 +61,8 @@ public class Test extends GameObject {
 
 			}else if(getWidth() <= 10 && getHeight() <= 10){
 				size = -size;
+			}else{
+				size++;
 			}
 
 

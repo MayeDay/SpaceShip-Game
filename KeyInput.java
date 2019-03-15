@@ -5,6 +5,8 @@ public class KeyInput extends KeyAdapter{
 
 	private Handler handler;
 	private GameObject player;
+
+	protected int x = 5;
 	//private SoundLoader soundLoader = new SoundLoader();
 	//private String soundPath =  "./Music-SoundEffects/hover.wav";
 
@@ -24,21 +26,21 @@ public class KeyInput extends KeyAdapter{
 
 
 		if(code == KeyEvent.VK_RIGHT){
-			player.setVelX(5);
+			player.setVelX(x);
 			player.isRight = true;
 
 
 		}else if(code == KeyEvent.VK_LEFT){
-			player.setVelX(-5);
+			player.setVelX(-x);
 			player.isRight = false;
 		
 		}else if(code == KeyEvent.VK_UP){
-			player.setVelY(-5);
+			player.setVelY(-x);
 			player.isDown = false;
 
 
 		}else if(code == KeyEvent.VK_DOWN){
-			player.setVelY(5);
+			player.setVelY(x);
 			player.isDown = true;
 
 		}else if(code == KeyEvent.VK_Z){
@@ -90,5 +92,12 @@ public class KeyInput extends KeyAdapter{
 		}else if(code == KeyEvent.VK_SPACE){
 			player.isShooting = false;
 		}
+	}
+
+	public int getX(){
+		return this.x;
+	}
+	public void setX(int x){
+		this.x = x;
 	}
 }

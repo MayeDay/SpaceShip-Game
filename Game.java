@@ -32,6 +32,7 @@ public class Game extends Canvas implements Runnable{
 	//Handler for GameObjects
 	private Handler handler;
 	public Random rand = new Random();
+	private HealthUp hpUp;
 
 	//Camera for player
 	private Camera cam;
@@ -40,7 +41,7 @@ public class Game extends Canvas implements Runnable{
 	private Player player;
 
 	//KeyBoard class
-	private KeyInput keyInput;
+	private static KeyInput keyInput;
 
 	//Mouse class
 	private MouseInput mouseInput;
@@ -83,6 +84,7 @@ public class Game extends Canvas implements Runnable{
 		
 		//Add Start Menu Buttons
 		menu = new StartMenu(mouseInput, frame, this);
+
 
 	}
 
@@ -192,12 +194,29 @@ public class Game extends Canvas implements Runnable{
 		//Check if start has been pressed
 		if(pressedStart == true){
 			if(player == null){
+
 				player = new Player(4500, 9500, 20, 40, ObjectId.Player, handler);
 				handler.add(player);
+
+				hpUp = new HealthUp(player.getX() + 40, player.getY() - 70, 25, 25, ObjectId.PowerUps, handler);
+				handler.add(hpUp);
+
+
 			}
 
 			//Ticks all existing game Objects
+		/**	for(int i = 0; i < 200; i++){
+				int spawn = rand.nextInt(20000);
+				int spawn1 = rand.nextInt(20000);
+					
+					if(spawn > player.getX() + 1000 && spawn < player.getX() + 1500 && spawn1 > player.getY() + 1000 && spawn1 < player.getY()+1500){
+						handler.add(new Test(rand.nextInt(spawn), rand.nextInt(spawn1), 25, 25, ObjectId.Test, handler));
+						System.out.println("x: " + spawn + " y: " + spawn1);
+						break;
+					}
+			}**/	
 			handler.tick();
+
 
 			//Checks if player has died
 			if(player.isDead == true){
@@ -219,6 +238,10 @@ public class Game extends Canvas implements Runnable{
 	//loads images
 	public static ImageLoader getImageLoader(){
 		return imageLoader;
+	}
+
+	public static KeyInput getKeyInput(){
+		return keyInput;
 	}
 
 
