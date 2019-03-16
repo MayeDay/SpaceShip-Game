@@ -12,6 +12,7 @@ public class StartMenu{
 	private Frame frame;
 	private ImageLoader imageLoader;
 	private BufferedImage image;
+	private HighScores hs;
 
 	private String start = "Start";
 	private String exit = "Exit";
@@ -104,6 +105,12 @@ public class StartMenu{
 			g2d.fill(highScoresButton.getButtonBounds());
 			g.setColor(new Color(195, 0, 255));
 			g.drawString(score, highScoresButton.getX() + 25, highScoresButton.getY() + 50);
+
+			if(mouseInput.isClicked == true){
+				hs = new HighScores("James", 9383);
+				hs.write();
+
+			}
 		}
 	}
 }

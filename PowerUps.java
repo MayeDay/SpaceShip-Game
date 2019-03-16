@@ -22,6 +22,7 @@ public class PowerUps extends GameObject{
 	//Color Green
 	protected int xxx, yyy, zzz;
 	protected Random rand = new Random();
+	protected int outRecW, outRecH;
 
 
 	//Loop
@@ -30,6 +31,9 @@ public class PowerUps extends GameObject{
 
 	public PowerUps(int x, int y, int width, int height, ObjectId id, Handler handler){
 		super(x, y, width, height, id);
+
+		this.outRecH = (height/3)*8;
+		this.outRecW = (width/3)*8;
 
 		this.handler = handler;
 		powerUpColor(0, 255, 50);
@@ -44,19 +48,24 @@ public class PowerUps extends GameObject{
 		xxx+=color;
 		zzz+=color;
 
-		setWidth(getWidth() + size);
-		setHeight(getHeight() + size);
+		outRecH+=size;
+		outRecW+=size;
+
 
 		if(loop == 15){
 			loop = 0;
-			if(getWidth() >= 26 && getHeight() >= 26){
+			if(outRecW >= 26 && outRecH >= 26 && getX() + size <= getX() + 26){
 				size = -size;
 
-			}else if(getWidth() <= 10 && getHeight() <= 10){
+
+			}else if(outRecW <= 20 && outRecH <= 20){
 				size = -size;
+				System.out.println("x: " + x +" y: " + y);
+
 			}else{
 				size++;
 			}
+
 		}else{
 			loop++;
 		}
@@ -119,33 +128,35 @@ public class PowerUps extends GameObject{
 
 		Graphics2D g2d = (Graphics2D)g;
 
+		g.setColor(Color.GREEN);
+		g.fillRect(getX() - width/3, getY() - height/3, outRecW, outRecH);
 
 		g.setColor(new Color(xxx, yyy, zzz));
-		g.fillOval(x - 11, y - 10, width*2, height*2);
+		g2d.fill(recBounds());
 
 		g.setColor(Color.WHITE);
 
-		g.fillRect(getX() + width - 15, getY() - height/2 + 5 , width/2, height*2 - 5);
-
+		g.fillRect(getX(), getY() + (height*3)/4, width*2, height/2);
+		g.fillRect(getX() + (width*3)/4, getY(), width/2, height*2);
 
 	//	g.setColor(new Color(xxx, yyy, zzz));
-	//	g.fillOval(x + size, y + size, width, height);
+		//g.fillOval(x + size, y + size, width, height);
 
 	
-		/**g.setColor(new Color(xxx, yyy, zzz));
-		g.fillOval(x + 6, y + 6, width/2, height/2);
+		g.setColor(new Color(yyy, yyy, xxx));
+		//g.fillOval(x + 6, y + 6, width/2, height/2);
 
-		g.setColor(new Color(xxx, yyy, zzz));
-		g2d.draw(getBounds());
+		g.setColor(new Color(zzz, xxx, yyy));
+		//g2d.draw(recBounds());
 
 		g.setFont(new Font("Arial", Font.ITALIC, 15 + size));
-		g.drawString(powerName, getX() - 22, getY() - 18);
-		**/
+		//g.drawString(powerName, getX() - 22, getY() - 18);
+		
 
 	}
 
 	public Rectangle recBounds(){
-		return(new Rectangle(x, y, width, height));
+		return(new Rectangle(x, y, width*2, height*2));
 	}
 
 	public Ellipse2D getBounds(){

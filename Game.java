@@ -18,7 +18,7 @@ public class Game extends Canvas implements Runnable{
 
 
 	//Game starting variable
-	protected final static String _TITLE = "World Wreckers";
+	protected final static String _TITLE = "Space Blasters";
 	protected final static int _WIDTH = 1000;
 	protected final static int _HEIGHT = 800;
 	private boolean isRunning = false;
@@ -33,6 +33,7 @@ public class Game extends Canvas implements Runnable{
 	private Handler handler;
 	public Random rand = new Random();
 	private HealthUp hpUp;
+	protected static HighScores hs;
 
 	//Camera for player
 	private Camera cam;
@@ -70,6 +71,7 @@ public class Game extends Canvas implements Runnable{
 		
 		soundLoader.loadSound("./Music-SoundEffects/Pio.wav");
 		soundLoader.playBackGroundMusic();
+		hs = new HighScores(handler);
 
 		keyInput = new KeyInput(handler);
 		addKeyListener(keyInput);
@@ -205,7 +207,7 @@ public class Game extends Canvas implements Runnable{
 			}
 
 			//Ticks all existing game Objects
-		/**	for(int i = 0; i < 200; i++){
+			for(int i = 0; i < 200; i++){
 				int spawn = rand.nextInt(20000);
 				int spawn1 = rand.nextInt(20000);
 					
@@ -214,7 +216,7 @@ public class Game extends Canvas implements Runnable{
 						System.out.println("x: " + spawn + " y: " + spawn1);
 						break;
 					}
-			}**/	
+			}	
 			handler.tick();
 
 
@@ -242,6 +244,10 @@ public class Game extends Canvas implements Runnable{
 
 	public static KeyInput getKeyInput(){
 		return keyInput;
+	}
+
+	public static HighScores getHighScores(){
+		return hs;
 	}
 
 

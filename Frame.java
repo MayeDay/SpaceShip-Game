@@ -30,12 +30,13 @@ public class Frame extends JFrame{
 		add(game);
 		pack();
 		setVisible(true);
+		setTitle(game._TITLE);
 		game.start();
+
 
 	}
 
 	public Game getGame(){
-		System.out.println("Frame getting game");
 		return this.game;
 	}
 

@@ -4,7 +4,7 @@ import java.awt.Graphics;
 public class Handler{
 	
 	public LinkedList<GameObject> objectList = new LinkedList<GameObject>();
-
+	public LinkedList<String> highscores = new LinkedList<String>();
 	private GameObject tempObject;
 
 
@@ -35,6 +35,11 @@ public class Handler{
 
 	public void remove(GameObject object){
 		objectList.remove(object);
+	}
+
+	public void addHighScore(String name, int score){
+
+		highscores.add(name+ " " + score);
 	}
 
 }

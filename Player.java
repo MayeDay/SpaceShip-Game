@@ -8,12 +8,18 @@ import java.awt.Font;
 import java.util.LinkedList;
 import java.util.Random;
 import javax.sound.sampled.Clip;
+import java.util.Scanner;
+import javax.swing.JLabel;
 
 
 public class Player extends GameObject{
 
 	private Handler handler;
+	private HighScores hs;
 	private Random rand = new Random();
+	private Scanner scan = new Scanner(System.in);
+	private String name;
+	private JLabel nameLabel;
 
 	protected int xxx, yyy, zzz;
 	protected int points = 0;
@@ -125,13 +131,21 @@ public class Player extends GameObject{
 			g.setFont(new Font("Arial", Font.ITALIC, 30));
 			g.drawString("Points: "+ points, getX() + 280, getY() - 340);
 		}else{
-			if(loop != 1800){
+			if(loop != 1000){
 				g.setColor(Color.RED);
 				g.setFont(new Font("Arial", Font.ITALIC, 20));
 				g.drawString("YOU HAVE DIED ", getX() - 25, getY());
+				g.setColor(Color.GREEN);
+				g.drawString("Score: " +points, getX() - 25, getY() + 25);
+
 				loop++;
 
-			}else if(loop == 1800){
+			}else if(loop == 1000){
+				name = scan.nextLine();
+				hs = Game.hs;
+				hs.addScore(name, points);
+				hs.write();
+
 				isDead = true;
 
 			}

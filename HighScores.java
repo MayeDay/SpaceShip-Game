@@ -1,65 +1,71 @@
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.awt.Rectangle;
-import java.awt.geom.Ellipse2D;
-import java.awt.Color;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.io.IOException;
 import java.util.LinkedList;
-import java.util.Random;
 
-public class PowerUps extends GameObject{
+
+public class HighScores {
 	
+	protected LinkedList<String> highScores = new LinkedList<String>();
 	private Handler handler;
-	private GameObject tempObject;
+	private String playerName;
+	private int score;
+	private int num = 1;
 
-	private int xxx, yyy, zzz;
+	private File statText;
+	private FileOutputStream os;
+	private OutputStreamWriter osw;
+	private Writer w;
 
 
-	public PowerUps(int x, int y, int width, int height, ObjectId id, Handler handler){
-		super(x, y, width, height, id);
+
+
+	public HighScores(Handler handler){
 
 		this.handler = handler;
+
+			statText = new File("./highScores/scores.txt");
+		
+		
+
+		num++;
 	}
 
-	public void tick(LinkedList<GameObject> object){
+	public void addScore(String name, int score){
 
-		if(xxx > 110) xxx = 1;
-		if(yyy > 225) yyy = 1;
-		if(zzz > 210) zzz = 1;
+		this.playerName = name;
+		this.score = score;
 
+		handler.highscores.add(name +" " + score);
 	}
 
-	public void collision(){
+	public void write(){
+	
+		try{
+			os = new FileOutputStream(statText, true);
+			osw = new OutputStreamWriter(os);
+			w = new BufferedWriter(osw);
+			
+			for(int i = 0; i < handler.highscores.size(); i++){
 
-		for(int i = 0; i < handler.objectList.size(); i++){
-			tempObject = handler.objectList.get(i);
+				w.write(handler.highscores.get(i) + "rank \n");
 
-			if(tempObject.getId() == ObjectId.Player){
-
-				if(recBounds().intersects(tempObject.recBounds())){
-
-				}
 			}
+
+			w.close();
+
+
+		}catch(IOException e){
+			e.printStackTrace();
 		}
 
-	}
-
-	public void render(Graphics g){
-
-		Graphics2D g2d = (Graphics2D)g;
-
-
 
 	}
 
-	public Rectangle recBounds(){
-		return(new Rectangle(x, y, width, height));
+	public void close(){
+
 	}
-
-	public void Ellipse2D(){
-		return(new Ellipse2D.Double(x, y , width, height));
-	}
-
-
-
 }
