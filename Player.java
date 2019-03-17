@@ -142,6 +142,7 @@ public class Player extends GameObject{
 
 			}else if(loop == 1000){
 				name = scan.nextLine();
+				g.drawString(name, getX() - 35, getY() + 35);
 				hs = Game.hs;
 				hs.addScore(name, points);
 				hs.write();

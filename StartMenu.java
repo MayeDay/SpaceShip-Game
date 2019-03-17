@@ -10,9 +10,8 @@ public class StartMenu{
 	private Game game;
 	private MouseInput mouseInput;
 	private Frame frame;
-	private ImageLoader imageLoader;
+	private Background background;
 	private BufferedImage image;
-	private HighScores hs;
 
 	private String start = "Start";
 	private String exit = "Exit";
@@ -30,8 +29,8 @@ public class StartMenu{
 		this.mouseInput = mouseInput;
 		this.frame = frame;
 
-		imageLoader = new ImageLoader();
-		image = imageLoader.loadImage("./res-background/title.JPEG");
+		background = new Background();
+		image = background.getMenu();
 
 		init();
 	}
@@ -107,8 +106,7 @@ public class StartMenu{
 			g.drawString(score, highScoresButton.getX() + 25, highScoresButton.getY() + 50);
 
 			if(mouseInput.isClicked == true){
-				hs = new HighScores("James", 9383);
-				hs.write();
+				game.pressedScores = true;
 
 			}
 		}

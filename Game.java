@@ -34,6 +34,9 @@ public class Game extends Canvas implements Runnable{
 	public Random rand = new Random();
 	private HealthUp hpUp;
 	protected static HighScores hs;
+	private HighScoreMenu hsm;
+
+
 
 	//Camera for player
 	private Camera cam;
@@ -52,6 +55,7 @@ public class Game extends Canvas implements Runnable{
 
 	//Starting Screen
 	protected boolean pressedStart;
+	protected boolean pressedScores;
 	private StartMenu menu;
 	
 
@@ -86,6 +90,8 @@ public class Game extends Canvas implements Runnable{
 		
 		//Add Start Menu Buttons
 		menu = new StartMenu(mouseInput, frame, this);
+		hsm = new HighScoreMenu(mouseInput, frame, handler, this);
+		handler.highscores.add("CAMMSN  899");
 
 
 	}
@@ -163,7 +169,7 @@ public class Game extends Canvas implements Runnable{
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, _WIDTH, _HEIGHT);
 
-		if(pressedStart == true){
+		if(pressedStart == true && pressedScores != true){
 		//////////////////////////////
 			
 			g.translate(cam.getX(), cam.getY());
@@ -178,11 +184,13 @@ public class Game extends Canvas implements Runnable{
 			g.translate(-cam.getX(), -cam.getY());
 		/////////////////////////////
 
-		}else{
+		}else if(pressedScores != true && pressedStart != true){
 			//Start Menu
 			menu.render(g);
 			
 			
+		}else if(pressedScores == true && pressedStart != true){
+			hsm.render(g);
 		}
 
 		g.dispose();

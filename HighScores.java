@@ -52,7 +52,6 @@ public class HighScores {
 			for(int i = 0; i < handler.highscores.size(); i++){
 
 				w.write(handler.highscores.get(i) + "rank \n");
-
 			}
 
 			w.close();
@@ -65,7 +64,7 @@ public class HighScores {
 
 	}
 
-	public void close(){
+	public void getScores(){
 
 	}
 }

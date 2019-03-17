@@ -14,6 +14,7 @@ public class Handler{
 			tempObject = objectList.get(i);
 			tempObject.tick(objectList);
 
+
 		}
 
 	}
@@ -37,9 +38,14 @@ public class Handler{
 		objectList.remove(object);
 	}
 
-	public void addHighScore(String name, int score){
+	public void addScore(String name, int score){
 
 		highscores.add(name+ " " + score);
+
+	}
+	public void removeScore(String name, int score){
+
+		highscores.remove(name + " " + score);
 	}
 
 }
