@@ -12,3 +12,5 @@ CAMMSN  899rank
 James 80rank 
 CAMMSN  899rank 
 James 20rank 
+CAMMSN  899rank 
+Pong 820rank 
