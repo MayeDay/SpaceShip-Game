@@ -34,7 +34,7 @@ public class Bullet extends GameObject{
 		
 		xxx--;
 
-		y-=getVelY();
+		y-=getVelY()*2;
 		
 		if (xxx <= 150){
 			xxx = 255;
@@ -53,7 +53,8 @@ public class Bullet extends GameObject{
 					soundPath = "./Music-SoundEffects/bang.wav";
 
 					playSound(soundPath, -8.0f);
-
+					
+					Game.amount-= 1;
 					handler.remove(tempObject);
 					handler.remove(this);
 

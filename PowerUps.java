@@ -39,6 +39,8 @@ public class PowerUps extends GameObject{
 		powerUpColor(0, 255, 50);
 
 		size = 1;
+
+
 		soundPath = "./Music-SoundEffects/powerUP.wav";
 
 	}
@@ -48,19 +50,18 @@ public class PowerUps extends GameObject{
 		xxx+=color;
 		zzz+=color;
 
-		outRecH+=size;
-		outRecW+=size;
+		setWidth(getWidth() + size);
+		setHeight(getHeight() + size);
 
 
-		if(loop == 15){
+		if(loop == 10){
 			loop = 0;
-			if(outRecW >= 26 && outRecH >= 26 && getX() + size <= getX() + 26){
+
+			if(width >= 45 && height >= 45){
 				size = -size;
 
-
-			}else if(outRecW <= 20 && outRecH <= 20){
+			}else if(width <= 5 && height <= 5){
 				size = -size;
-				System.out.println("x: " + x +" y: " + y);
 
 			}else{
 				size++;
@@ -95,7 +96,7 @@ public class PowerUps extends GameObject{
 
 			if(tempObject.getId() == ObjectId.Player){
 
-				if(recBounds().intersects(tempObject.recBounds()) || getBounds().intersects(tempObject.getX(), tempObject.getY(), tempObject.getWidth(), tempObject.getHeight())){
+				if(getBounds().intersects(tempObject.recBounds()) || getBounds().intersects(tempObject.getX(), tempObject.getY(), tempObject.getWidth(), tempObject.getHeight())){
 					playSound(soundPath, 5.0f);
 
 					powerUpName("Null");
@@ -129,15 +130,13 @@ public class PowerUps extends GameObject{
 		Graphics2D g2d = (Graphics2D)g;
 
 		g.setColor(Color.GREEN);
-		g.fillRect(getX() - width/3, getY() - height/3, outRecW, outRecH);
 
 		g.setColor(new Color(xxx, yyy, zzz));
-		g2d.fill(recBounds());
+		g2d.fill(getBounds());
 
 		g.setColor(Color.WHITE);
 
-		g.fillRect(getX(), getY() + (height*3)/4, width*2, height/2);
-		g.fillRect(getX() + (width*3)/4, getY(), width/2, height*2);
+		
 
 	//	g.setColor(new Color(xxx, yyy, zzz));
 		//g.fillOval(x + size, y + size, width, height);
@@ -150,7 +149,7 @@ public class PowerUps extends GameObject{
 		//g2d.draw(recBounds());
 
 		g.setFont(new Font("Arial", Font.ITALIC, 15 + size));
-		//g.drawString(powerName, getX() - 22, getY() - 18);
+		g.drawString(powerName, getX() - 22, getY() - 18);
 		
 
 	}
@@ -160,7 +159,7 @@ public class PowerUps extends GameObject{
 	}
 
 	public Ellipse2D getBounds(){
-		return(new Ellipse2D.Double(x - 12, y - 11 , width*2, height*2));
+		return(new Ellipse2D.Double(x, y, width + size, height + size));
 	}
 
 

@@ -50,6 +50,7 @@ public abstract class GameObject implements States{
 	//Player exp enemy Points
 	protected int points;
 	protected int health;
+	protected int amount;
 
 
 

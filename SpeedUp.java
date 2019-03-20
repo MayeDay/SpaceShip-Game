@@ -7,19 +7,20 @@ import java.awt.Color;
 import java.util.LinkedList;
 import java.util.Random;
 
-public class HealthUp extends PowerUps{
+public class SpeedUp extends PowerUps{
 	
 	private KeyInput keyInput = Game.getKeyInput();
+	
+	private String name = "Speed Up!";
 
-	private String name = "Health Up!";
 
-	public HealthUp(int x, int y, int width, int height, ObjectId id, Handler handler){
+	public SpeedUp(int x, int y, int width, int height, ObjectId id, Handler handler){
 		super(x, y, width, height, id, handler);
 
 		this.handler = handler;
 
 		powerUpName(name);
-		powerUpColor(0, 235, 50);
+		powerUpColor(200, 50, 1);
 	}
 
 	public void powerUpAbility(){
@@ -28,22 +29,12 @@ public class HealthUp extends PowerUps{
 			GameObject tempObject = handler.objectList.get(i);
 
 			if(tempObject.getId() == ObjectId.Player){
-				if(tempObject.health <= 400){
-					tempObject.health += 50;
+				if(keyInput. x <= 10){
+					keyInput.x++;
 				}
-
 			}
 		}
 	}
-
-
-
-	
-
-
-
-
-
 
 
 

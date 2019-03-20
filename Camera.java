@@ -16,12 +16,12 @@ public class Camera{
 	public void tick(GameObject player){
 		this.player = player;
 
-		x = -player.getX() + Game._WIDTH/2 - Game.WIDTH/2;
+		if(player.getY() <= 159000){
+			y = -player.getY() + Game._HEIGHT/2 - Game.HEIGHT/2;
+		
+		}else{
 
-		y = -player.getY() + Game._HEIGHT/2 - Game.HEIGHT/2;
-
-		y--;
-
+		}
 	}
 
 	public int getX(){

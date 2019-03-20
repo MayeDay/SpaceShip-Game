@@ -26,10 +26,14 @@ public class Player extends GameObject{
 	protected boolean isDead = false;
 	protected int loop = 0;
 
+	protected Hud hud;
+
 
 	public Player(int x, int y, int width, int height, ObjectId id, Handler handler){
 		super(x, y, width, height, id);
 		this.handler = handler;
+
+		hud = new Hud(this);
 
 		health = 300;
 		//flying sound
@@ -63,18 +67,35 @@ public class Player extends GameObject{
 		}
 		//Move To Game Class
 		
-
+		hud.tick();
 		collision();
 		deathCheck();
 	}
 
 	public void collision(){
 
+		if(getX() <=11){
+			setX(11);
+		}
+		if(getX() >= Game._WIDTH - 50){
+			setX(Game._WIDTH - 50);
+		}
+
+		if(getY() >= 159260 + height){
+			setY(159260 + height);
+		}
+		
 		for(int i = 0; i < handler.objectList.size(); i++){
 			GameObject tempObject = handler.objectList.get(i);
 			if(tempObject.getId() == ObjectId.Test){
 				if(recBounds().intersects(tempObject.recBounds()) || recBounds().intersects(tempObject.getX(), tempObject.getY(), tempObject.getWidth(), tempObject.getHeight())){
+					Game.amount-= 1;
 					handler.remove(tempObject);
+					
+					Game.amount-= 1;
+					
+					System.out.println(Game.amount);
+					
 					playSound(soundEffect, 6.0f);
 					health -=50;
 
@@ -120,16 +141,18 @@ public class Player extends GameObject{
 			//g2d.draw(recBounds());
 
 			//HUD
-			g.setColor(Color.RED);
-			g.fillRect(getX() -480, getY() - 360, 300, 30);
-			g.setColor(Color.GREEN);
-			g.fillRect(getX() -480, getY() - 360, health, 30);
+			if(hud.getY() >= 158640){
+				hud.y = 158640;
+			}
 
-			g.setFont(new Font("Arial", Font.ITALIC, 20));
-			g.drawString("Health ", getX() -480, getY() - 370);
+			if(hud.getX() <=20 || hud.getX() >= 20){
+				hud.x = 20;
+			}
 
-			g.setFont(new Font("Arial", Font.ITALIC, 30));
-			g.drawString("Points: "+ points, getX() + 280, getY() - 340);
+			
+
+			hud.render(g);
+
 		}else{
 			if(loop != 1000){
 				g.setColor(Color.RED);
@@ -141,8 +164,14 @@ public class Player extends GameObject{
 				loop++;
 
 			}else if(loop == 1000){
-				name = scan.nextLine();
-				g.drawString(name, getX() - 35, getY() + 35);
+				
+				Thread tempThread = new Thread(new Runnable(){
+					public void run(){
+						name = scan.nextLine();
+						g.drawString(name, getX() - 35, getY() + 35);
+					}
+				});
+				tempThread.start();
 				hs = Game.hs;
 				hs.addScore(name, points);
 				hs.write();

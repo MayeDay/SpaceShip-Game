@@ -105,13 +105,19 @@ public class Test extends GameObject {
 	}
 
 	private void remove(){
+		
 		for(int i = 0; i < handler.objectList.size(); i++){
+			
 			tempObject = handler.objectList.get(i);
 
 			if(tempObject.getId() == ObjectId.Player){
-				if(x > tempObject.getX() +2000 || x < tempObject.getX() -2000 || y > tempObject.getY() + 2000 || y < tempObject.getY() - 2000){
+				
+				if(y > tempObject.getY() + 300){
+						Game.amount-= 1;
+
 					handler.remove(this);
-					System.out.println("Removed x:" + x +" y:" +y);
+
+					System.out.println("Removed x:" + x +" y:" +y + " " + Game.amount);
 				}
 			}
 		}
