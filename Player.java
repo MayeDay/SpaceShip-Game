@@ -169,13 +169,12 @@ public class Player extends GameObject{
 					public void run(){
 						name = scan.nextLine();
 						g.drawString(name, getX() - 35, getY() + 35);
+						hs = Game.hs;
+						hs.addScore(name, points);
+						hs.write();
 					}
 				});
 				tempThread.start();
-				hs = Game.hs;
-				hs.addScore(name, points);
-				hs.write();
-
 				isDead = true;
 
 			}

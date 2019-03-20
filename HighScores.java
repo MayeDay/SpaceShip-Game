@@ -19,6 +19,7 @@ public class HighScores {
 	private FileOutputStream os;
 	private OutputStreamWriter osw;
 	private Writer w;
+	protected int x, y;
 
 
 
