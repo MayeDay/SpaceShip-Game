@@ -149,8 +149,6 @@ public class Player extends GameObject{
 				hud.x = 20;
 			}
 
-			
-
 			hud.render(g);
 
 		}else{
